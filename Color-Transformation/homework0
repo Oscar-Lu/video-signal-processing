@@ -1,0 +1,111 @@
+//---------------EE6650 HW1---------------//
+#include <cstdlib>
+#include <iostream>
+#include <fstream>
+#include <math.h>
+
+using namespace std;
+
+//-----initial command setting-----//
+string p_binfile ;
+string p_headerfile;
+string srgbfile;
+string srgbfile_wb;
+string out_raw;
+
+int data_width;
+int data_height;
+int data_size;
+int header_size;
+int x_s;
+int x_l;
+int y_s;
+int y_l;
+
+
+//-----declare functions-----//
+void setInfoFromCMD(int argc, char *argv[]);
+
+int main(int argc, char *argv[])
+{
+	setInfoFromCMD(argc, argv);
+	const char* header_str = p_headerfile.c_str();
+	const char* bin_file = p_binfile.c_str();
+	const char* out_file = srgbfile.c_str();
+	const char* out_wb_file = srgbfile_wb.c_str();
+	const char* out_raw_file = out_raw.c_str();
+
+	// open file
+	fstream header_file;
+	fstream input_file;
+	fstream output_file;
+	fstream output_wb_file;
+	fstream output_raw_file;
+	header_file.open(header_str, ios::in | ios::binary);
+	input_file.open(bin_file, ios::in | ios::binary);
+	output_file.open(out_file, ios::out | ios::binary);
+	output_wb_file.open(out_wb_file, ios::out | ios::binary);
+	output_raw_file.open(out_raw_file, ios::out | ios::binary);
+	
+	//-------your code here-------//
+	//turn bin file into D50 bmp file
+	//turn D50 into D65
+	//turn srgb file into YCbCr format
+	//white balance
+	//...
+	
+	
+
+	//-------your code end-------//
+	
+	// close file
+	header_file.close();
+	input_file.close();
+	output_file.close();;
+	output_wb_file.close();
+	output_raw_file.close();
+}
+
+void setInfoFromCMD(int argc, char *argv[])
+{
+	// command line
+	if (argc >= 2) {
+		p_binfile = argv[1];
+	}
+	if (argc >= 3) {
+		p_headerfile = argv[2];
+	}
+	if (argc >= 4) {
+		srgbfile = argv[3];
+	}
+	if (argc >= 5) {
+		srgbfile_wb = argv[4];
+	}
+	if (argc >= 6) {
+		out_raw = argv[5];
+	}
+	if (argc >= 7) {
+		data_width = atoi(argv[6]);
+	}
+	if (argc >= 8) {
+		data_height = atoi(argv[7]);
+	}
+	if (argc >= 9) {
+		header_size = atoi(argv[8]);
+	}
+	if (argc >= 10){
+		x_s = atoi(argv[9]);
+	}
+	if (argc >= 11){
+		x_l = atoi(argv[10]);
+	}
+	if (argc >= 12){
+		y_s = atoi(argv[11]);
+	}
+	if (argc >= 13){
+		y_l = atoi(argv[12]);
+	}
+
+	data_size = data_width * data_height;
+	return;
+};
